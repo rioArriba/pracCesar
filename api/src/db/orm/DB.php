@@ -28,8 +28,7 @@ class DB {
         $data = self::execute($sql, $params);
         if(count($data) > 0) {
             return (object) $data[0];
-        }
-     
+        }     
         throw new \Exception("Recurso no encontrado", 404);        
     }
 
@@ -45,15 +44,20 @@ class DB {
         return self::executeNoResult($sql, $params);
     }
 
-
+    public static function update(string $sql, array $params): int {
+        return self::executeNoResult($sql, $params);
+    }
+    
          
     private static function executeNoResult(string $sql, array $params):int {
         $pdo = DBFactory::getConnection()::connect();
         try {
             $ps = $pdo->prepare($sql);
-            return $ps->execute($params);    
+            $count = $ps->execute($params); 
+            //echo $count;
+            //dd($count);
+            return $count;    
         } catch (\Throwable $th){
-            //throw $th;
             throw new \Exception("Error al insertar el recurso", 400);
         }
     }    

@@ -65,12 +65,22 @@ class QueryBuilder {
     }
 
     public function update($id, array $data) {
-        $this->where('id','=',$data);
+        $this->find($id);
+        $this->where('id','=',$id);
+        $fieldsParams ="";
+        foreach ($data as $key => $value) {
+            $fieldsParams .= " $key=:$key,";
+            $this->params[":$key"] = $value;
+        }
+        $fieldsParams = rtrim($fieldsParams, ',');
+        $this->sql = "UPDATE $this->table SET $fieldsParams $this->where";
+        return DB::update($this->sql, $this->params);
         
     }
     public function delete(int $id) {
+        $this->find($id);
         $this->where('id',"=",$id);
         $this->sql= "DELETE FROM $this->table $this->where";
         return DB::delete($this->sql, $this->params);
     }
- }
+}

@@ -32,36 +32,28 @@ class MoviesController {
         }
     }
 
-    public function insert() {
-        try {
-            $data = json_decode(file_get_contents('php://input'), true);
-            if($data['titulo'] && $data['anyo'] && $data['duracion']) {
-                echo "yoooouu";
-                $movie = new MovieDTO(null, $data['titulo'], $data['anyo'], $data['duracion']);
-            } else {                
-                throw new \Exception("Faltan campos de la pelicula sin rellenar");
-            }
-            MoviesFactory::getService()::insert($movie);
-            HTTPResponse::json(201, "Recurso creado");
-        } catch (\Exception $e) {
-            HTTPResponse::json($e->getCode(), $e->getMessage());
-        }
+    public function insert() {       
+            $movie = $this->jsonDepurado();
+            if($movie instanceof MovieDTO) {
+                MoviesFactory::getService()::insert($movie);
+                HTTPResponse::json(201, "Recurso creado");
+            } else {
+                HTTPResponse::json(400, "No se modifica la base de datos.");
+            }  
     }
 
-    public function update($id) {
-        try {
-            $data = json_decode(file_get_contents('php://input'), true);
-            if($data['titulo'] && $data['anyo'] && $data['duracion']) {
-                $movie = new MovieDTO(null, $data['titulo'], $data['anyo'], $data['duracion']);
+    public function update($id) {      
+            $movie = $this->jsonDepurado();
+            if($movie instanceof MovieDTO) {
+                try {
+                MoviesFactory::getService()::update($id,$movie);
+                HTTPResponse::json(201, "Recurso actualizado"); 
+                } catch(\Exception $e) {
+                    HTTPResponse::json(404, $e->getMessage());
+                }
             } else {
-                throw new \Exception("Faltan campos de la pelicula sin rellenar");
-
-            }
-            MoviesFactory::getService()::update($id,$movie);
-            HTTPResponse::json(201, "Recurso actualizado");
-        } catch (\Exception $e) {
-            HTTPResponse::json($e->getCode(), $e->getMessage());
-        }
+                HTTPResponse::json(400, "No se modifica la base de datos.");
+            }     
     }
 
     public function delete($id){
@@ -71,6 +63,23 @@ class MoviesController {
         } catch (\Throwable $th) {
             HTTPResponse::json(404, $th->getMessage());
             //echo json_encode($th->getMessage());
+        }
+    }
+
+    public function jsonDepurado() {
+        try {
+            $data = json_decode(file_get_contents('php://input'), true);
+            if(isset($data['titulo']) && isset($data['anyo']) && isset($data['duracion'])) {            
+                if(gettype($data['titulo'])=="string" && gettype($data['anyo'])=="integer" && gettype($data['duracion'])=="integer") {
+                    return new MovieDTO(null, $data['titulo'], $data['anyo'], $data['duracion']);
+                } else {
+                throw new \Exception("Campos de la pelicula en formato erroneo.", 400);
+                }
+            } else {
+                throw new \Exception("Faltan campos de la pelicula.",400);
+            }
+        }  catch (\Exception $e) {
+            HTTPResponse::json($e->getCode(), $e->getMessage());
         }
     }
 }
