@@ -66,7 +66,6 @@ class QueryBuilder {
 
     public function update($id, array $data) {
         $this->find($id);
-        $this->where('id','=',$id);
         $fieldsParams ="";
         foreach ($data as $key => $value) {
             $fieldsParams .= " $key=:$key,";
@@ -79,7 +78,6 @@ class QueryBuilder {
     }
     public function delete(int $id) {
         $this->find($id);
-        $this->where('id',"=",$id);
         $this->sql= "DELETE FROM $this->table $this->where";
         return DB::delete($this->sql, $this->params);
     }
