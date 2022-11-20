@@ -54,8 +54,6 @@ class DB {
         try {
             $ps = $pdo->prepare($sql);
             $count = $ps->execute($params); 
-            //echo $count;
-            //dd($count);
             return $count;    
         } catch (\Throwable $th){
             throw new \Exception("Error al insertar el recurso", 400);

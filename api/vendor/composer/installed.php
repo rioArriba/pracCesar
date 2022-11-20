@@ -3,7 +3,7 @@
         'name' => 'cesar/api',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '94a445b53db993298b9351a0590628ee01c53f8f',
+        'reference' => '44964340548f5639e0dd3c0583f3d1225955ae6b',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,7 +22,7 @@
         'cesar/api' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '94a445b53db993298b9351a0590628ee01c53f8f',
+            'reference' => '44964340548f5639e0dd3c0583f3d1225955ae6b',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
