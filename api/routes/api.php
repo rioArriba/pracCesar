@@ -19,5 +19,10 @@ $router->set404(function() {
     http_response_code(404);
     echo json_encode(['Message' => 'Recurso no encontrado']);
 });
+$router->get('/actores', 'controllers\ActoresController@all');
+$router->get('/actores/(\d+)', 'controllers\ActoresController@find');
+$router->post('/actores', 'controllers\ActoresController@insert');
+$router->delete('/actores/(\d+)', 'controllers\ActoresController@delete');
+$router->put('/actores/(\d+)', 'controllers\ActoresController@update');
 
 $router->run();

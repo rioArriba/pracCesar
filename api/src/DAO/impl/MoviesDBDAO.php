@@ -11,12 +11,12 @@ use App\db\orm\QueryBuilder;
 class MoviesDBDAO implements IMoviesDAO {
  
     static function create(MovieDTO $movie): int {
-        return DB::table('movies')->insert(['titulo' => $movie->titulo(), 'anyo' => $movie->anyo(), 'duracion' => $movie->duracion()]);
+        return DB::table('peliculas')->insert(['titulo' => $movie->titulo(), 'anyo' => $movie->anyo(), 'duracion' => $movie->duracion()]);
     }
      
     static function read(): array {
         $result = array();        
-        $db_data = DB::table('movies')->select('*')->get();
+        $db_data = DB::table('peliculas')->select('*')->get();
         foreach ($db_data as $movie) {
             $result[] = new MovieDTO(
                 $movie->id, 

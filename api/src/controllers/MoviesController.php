@@ -18,7 +18,7 @@ class MoviesController {
         try {
             HTTPResponse::json(200, MoviesFactory::getService()::all());
         } catch(\PDOException $e) {
-            HTTPResponse::json($e->getCode(), $e->getMessage());
+            HTTPResponse::json(intval($e->getCode()), $e->getMessage());
         }       
     }
 
