@@ -2,7 +2,7 @@
 
  namespace App\factories; 
  
-use APP\DAO\impl\ActoresDAO;
+use App\DAO\impl\ActoresDAO;
 use App\services\impl\ActoresService;
 
  class ActoresFactory {

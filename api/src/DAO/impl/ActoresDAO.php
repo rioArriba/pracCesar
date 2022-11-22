@@ -1,6 +1,10 @@
 <?php
 
-namespace APP\DAO\impl;
+namespace App\DAO\impl;
+
+use App\db\orm\DB;
+use App\DTO\ActorDTO;
+use App\DAO\IActoresDAO;
 
 class ActoresDAO implements IActoresDAO{
 
