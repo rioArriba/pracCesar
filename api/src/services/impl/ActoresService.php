@@ -9,16 +9,16 @@ class ActoresService implements IActoresService {
     public static function read() {
         return ActoresFactory::getDAO()::read();
     }
-    function find() {
-        return true;
+    public static function find($id) {
+        return ActoresFactory::getDAO()::findById($id);
     }
-    function insert() {
-        return true;
+    public static function insert($actor) {
+        return ActoresFactory::getDAO()::create($actor);
     }
-    function delete() {
-        return true;
+    public static function delete($id) {
+        return ActoresFactory::getDAO()::delete($id);
     }
-    function update(){
-        return true;
+    public static function update($id,$actor){
+        return ActoresFactory::getDAO()::update($id, $actor);
     }
 }

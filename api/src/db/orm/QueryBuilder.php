@@ -21,7 +21,6 @@ class QueryBuilder {
         $this->fields = (is_null($fields))? '*': $fields;
         return $this;
     }
-
     
     public function where(string $field, string $condition, ?string $value) {
         if (is_null($value)) {

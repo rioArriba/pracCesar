@@ -46,7 +46,7 @@ class MoviesController {
             $movie = $this->jsonDepurado();
             if($movie instanceof MovieDTO) {
                 try {
-                MoviesFactory::getService()::update($id,$movie);
+                MoviesFactory::getService()::update($id,$movie);              
                 HTTPResponse::json(201, "Recurso actualizado"); 
                 } catch(\Exception $e) {
                     HTTPResponse::json(404, $e->getMessage());

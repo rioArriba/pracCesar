@@ -40,7 +40,7 @@ class MoviesDBDAO implements IMoviesDAO {
     }
  
     static function update(int $id, MovieDTO $movie): int {
-        return DB::table('movies')->update($id, ['titulo' => $movie->titulo(), 'anyo' => $movie->anyo(), 'duracion' => $movie->duracion()]);
+      return DB::table('peliculas')->update($id, ['titulo' => $movie->titulo(), 'anyo' => $movie->anyo(), 'duracion' => $movie->duracion()]);
     }
      
     static function delete(int $id): int {
