@@ -29,7 +29,7 @@ class MoviesDBDAO implements IMoviesDAO {
     }
      
     static function findById(int $id): MovieDTO {
-        $db_data = DB::table('movies')->find($id);
+        $db_data = DB::table('peliculas')->find($id);
         $result = new MovieDTO(
                 $db_data->id, 
                 $db_data->titulo, 
@@ -44,7 +44,7 @@ class MoviesDBDAO implements IMoviesDAO {
     }
      
     static function delete(int $id): int {
-        return DB::table('movies')->delete($id);
+        return DB::table('peliculas')->delete($id);
     }
  
  

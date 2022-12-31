@@ -1,12 +1,10 @@
 <?php
 $router = new \Bramus\Router\Router();
 
-
 $router->setNamespace('\App');
 
-/**
- * Definimos nuestras rutas
- */
+$router->post('/registro','controllers\UserController@insert');
+
 $router->get('/', function() { echo "Bienvenido a la API de películas"; });
 $router->get('/peliculas', 'controllers\MoviesController@all');
 $router->get('/peliculas/(\d+)', 'controllers\MoviesController@find');
