@@ -3,7 +3,9 @@ $router = new \Bramus\Router\Router();
 
 $router->setNamespace('\App');
 
-$router->post('/registro','controllers\UserController@insert');
+$router->post('/registro','controllers\UserController@registro');
+$router->post('/login', 'controllers\UserController@login');
+$router->post('/logout/(\d+)', 'controllers\UserController@logout');
 
 $router->get('/', function() { echo "Bienvenido a la API de películas"; });
 $router->get('/peliculas', 'controllers\MoviesController@all');

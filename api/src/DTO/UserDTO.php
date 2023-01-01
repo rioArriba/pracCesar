@@ -11,6 +11,7 @@ class UserDTO implements JsonSerializable{
 	    $this->usuario = $usuario;
 	    $this->password = $password;
 	    $this->admin = $admin;
+		$this->loged = $loged;
 
 	}
 

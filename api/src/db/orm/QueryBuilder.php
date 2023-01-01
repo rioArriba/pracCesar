@@ -47,6 +47,11 @@ class QueryBuilder {
         return $this->getOne();
     }
 
+    public function findUser(string $usuario) {
+        $this->where('usuario', '=', $usuario);
+        return $this->getOne();
+    }
+
     private function toSql() {
         dd($this->sql);
     }
